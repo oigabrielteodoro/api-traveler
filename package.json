@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "node dist/src/index.js",
-    "dev": "nodemon --exec sucrase-node src/index.ts",
+    "dev": "nodemon --exec sucrase-node src/shared/infra/http",
     "test": "jest --passWithNoTests && yarn test:integration",
     "test:watch": "jest --watch",
     "test:integration": "jest --passWithNoTests --config jest.config.integration.js",
