@@ -3,7 +3,7 @@ import { fromEither } from 'fp-ts/lib/TaskEither'
 
 import { getErrorMessage, mapAll } from '@/config'
 
-import { errorMessage, passwordCodec } from './password'
+import { passwordCodec, passwordErrorMessage } from './password'
 
 it('should validate password property', async () => {
   return pipe(
@@ -19,6 +19,6 @@ it('should not accept a password less then 8 characters long', async () => {
     '12345',
     passwordCodec.decode,
     fromEither,
-    mapAll(errors => expect(getErrorMessage(errors)).toBe(errorMessage)),
+    mapAll(errors => expect(getErrorMessage(errors)).toBe(passwordErrorMessage)),
   )()
 })

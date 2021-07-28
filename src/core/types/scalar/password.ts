@@ -5,7 +5,7 @@ type PasswordBrand = {
   readonly Password: unique symbol
 }
 
-export const errorMessage = 'Password should be at least 8 characters.'
+export const passwordErrorMessage = 'Password should be at least 8 characters.'
 
 export const passwordCodec = withMessage(
   t.brand(
@@ -13,7 +13,7 @@ export const passwordCodec = withMessage(
     (value): value is t.Branded<string, PasswordBrand> => value.length >= 8,
     'Password',
   ),
-  () => errorMessage,
+  () => passwordErrorMessage,
 )
 
 export type Password = t.TypeOf<typeof passwordCodec>
