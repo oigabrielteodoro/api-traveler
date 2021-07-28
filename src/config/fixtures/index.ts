@@ -1,6 +1,10 @@
 import { pipe } from 'fp-ts/function'
 import { map, mapLeft, TaskEither } from 'fp-ts/TaskEither'
 
+export function unsafe <T> (value: unknown): T {
+  return value as T
+}
+
 type Callback = (result: unknown) => unknown;
 type MapAll = (
   fn: Callback

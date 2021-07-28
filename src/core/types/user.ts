@@ -10,3 +10,11 @@ export const userCodec = t.type({
 })
 
 export type User = t.TypeOf<typeof userCodec>
+
+export const createUserCodec = t.type({
+  name: t.string,
+  password: passwordCodec,
+  email: emailCodec,
+})
+
+export type CreateUser = t.TypeOf<typeof createUserCodec>

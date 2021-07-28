@@ -3,7 +3,7 @@ import { pipe } from 'fp-ts/function'
 
 import { mapAll, getErrorMessage } from '@/config'
 
-import { emailCodec } from './email'
+import { emailCodec, emailErrorMessage } from './email'
 
 it('should valid email correctly', async () => {
   return pipe(
@@ -19,6 +19,6 @@ it('should return error when email is invalid', async () => {
     'invalid-email',
     emailCodec.decode,
     fromEither,
-    mapAll((errors) => expect(getErrorMessage(errors)).toBe('Invalid email.')),
+    mapAll((errors) => expect(getErrorMessage(errors)).toBe(emailErrorMessage)),
   )
 })
