@@ -10,18 +10,15 @@ it('should valid email correctly', async () => {
     'johndoe@example.com',
     emailCodec.decode,
     fromEither,
-    mapAll(result => expect(result).toBe('johndoe@example.com'))
+    mapAll((result) => expect(result).toBe('johndoe@example.com')),
   )
 })
-
-
-
 
 it('should return error when email is invalid', async () => {
   return pipe(
     'invalid-email',
     emailCodec.decode,
     fromEither,
-    mapAll(errors => expect(getErrorMessage(errors)).toBe('Invalid email.'))
+    mapAll((errors) => expect(getErrorMessage(errors)).toBe('Invalid email.')),
   )
 })
