@@ -1,6 +1,9 @@
 import { inject, injectable } from 'tsyringe'
+import { classToClass } from 'class-transformer'
 
 import { AppError } from '@/shared/errors'
+
+import { HashProvider } from '@/shared/container/providers/HashProvider/models'
 
 import { CreateUser, IUsersRepository } from '../types'
 
@@ -9,6 +12,9 @@ export class CreateUserUseCase {
   constructor (
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
+    @inject('HashProvider')
+    private hashProvider: HashProvider,
   ) {}
 
   async execute (data: CreateUser) {
@@ -18,8 +24,13 @@ export class CreateUserUseCase {
       throw new AppError('User already exists with this email.', 403)
     }
 
-    const user = await this.usersRepository.create(data)
+    const passwordHashed = await this.hashProvider.generateHash(data.password)
 
-    return user
+    const user = await this.usersRepository.create({
+      ...data,
+      password: passwordHashed,
+    })
+
+    return classToClass(user)
   }
 }

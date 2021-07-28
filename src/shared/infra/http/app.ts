@@ -2,10 +2,12 @@ import express from 'express'
 
 import { errors } from 'celebrate'
 
+import { getAppErrors } from '@/shared/errors'
+
+import 'express-async-errors'
+
 import '@/shared/infra/database'
 import '@/shared/container'
-
-import { getAppErrors } from '@/shared/errors'
 
 import routes from './routes'
 
