@@ -1,7 +1,9 @@
 import * as t from 'io-ts'
 
+import { emailCodec } from '@/core/types/scalar/email'
+
 export const userCodec = t.type({
-  email: t.string,
+  email: emailCodec,
   name: t.string,
   password: t.string,
   avatar_url: t.string,
