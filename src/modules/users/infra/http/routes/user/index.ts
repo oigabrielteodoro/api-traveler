@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { celebrate, Segments } from 'celebrate'
+import { celebrate, Joi, Segments } from 'celebrate'
 
-import { createUser } from '@/modules/users/types'
+import { createUser, updateUser } from '@/modules/users/types'
 import { UserController } from '@/modules/users/infra/http/controllers'
 
 export const userRouter = Router()
@@ -14,4 +14,15 @@ userRouter.post(
     [Segments.BODY]: createUser,
   }),
   userController.create,
+)
+
+userRouter.put(
+  '/:user_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      user_id: Joi.string().uuid().required(),
+    },
+    [Segments.BODY]: updateUser,
+  }),
+  userController.update,
 )

@@ -7,7 +7,7 @@ export type CreateUser = {
 }
 
 export const createUser = {
-  full_name: Joi.string().required(),
+  full_name: Joi.string().required().trim().pattern(/ /),
   email: Joi.string().email().required(),
   password: Joi.string().min(8),
 }
